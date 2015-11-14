@@ -6,7 +6,7 @@
  * @author SimplePortal Team
  * @copyright 2015 SimplePortal Team
  * @license BSD 3-clause
- * @version 1.0.0 Beta 1
+ * @version 1.0.0 Beta 2
  */
 
 if (!defined('ELK'))
@@ -476,18 +476,21 @@ function sp_integrate_menu_buttons(&$buttons)
 
 	// Set the right portalurl based on what integration mode the portal is using
 	if ($modSettings['sp_portal_mode'] == 1 && empty($context['disable_sp']))
-		$sportalurl = $scripturl . '?action=forum';
+		$sportal_url = $scripturl . '?action=forum';
 	elseif ($modSettings['sp_portal_mode'] == 3 && empty($context['disable_sp']))
-		$sportalurl = $modSettings['sp_standalone_url'];
+	{
+		$buttons['home']['href'] = $modSettings['sp_standalone_url'];
+		$sportal_url = $modSettings['sp_standalone_url'];
+	}
 	else
-		$sportalurl = '';
+		return;
 
 	// Define the new menu item(s), show it for modes 1 and 3 only
 	$buttons = elk_array_insert($buttons, 'home', array(
 		'forum' => array(
 			'title' => empty($txt['sp-forum']) ? 'Forum' : $txt['sp-forum'],
 			'data-icon' => '&#xf0c0;',
-			'href' => $sportalurl,
+			'href' => $sportal_url,
 			'show' => in_array($modSettings['sp_portal_mode'], array(1, 3)) && empty($context['disable_sp']),
 			'sub_buttons' => array(),
 		),
