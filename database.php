@@ -6,7 +6,7 @@
  * @author SimplePortal Team
  * @copyright 2015 SimplePortal Team
  * @license BSD 3-clause
- * @version 1.0.0 Beta 1
+ * @version 1.0.0 Beta 2
  */
 
 if (file_exists(dirname(__FILE__) . '/SSI.php') && !defined('ELK'))
@@ -35,6 +35,7 @@ $sp_tables = array(
 			array('name' => 'type', 'type' => 'tinytext'),
 			array('name' => 'date', 'type' => 'int', 'size' => 10, 'default' => 0),
 			array('name' => 'permissions', 'type' => 'mediumint', 'size' => 8, 'default' => 0),
+			array('name' => 'styles', 'type' => 'mediumint', 'size' => 8, 'default' => 0),
 			array('name' => 'views', 'type' => 'int', 'size' => 10, 'default' => 0),
 			array('name' => 'comments', 'type' => 'int', 'size' => 10, 'default' => 0),
 			array('name' => 'status', 'type' => 'tinyint', 'size' => 4, 'default' => 1),
@@ -51,12 +52,12 @@ $sp_tables = array(
 			array('name' => 'col', 'type' => 'tinyint', 'size' => 4, 'default' => 0),
 			array('name' => 'row', 'type' => 'tinyint', 'size' => 4, 'default' => 0),
 			array('name' => 'permissions', 'type' => 'mediumint', 'size' => 8, 'default' => 0),
+			array('name' => 'styles', 'type' => 'mediumint', 'size' => 8, 'default' => 0), 
 			array('name' => 'state', 'type' => 'tinyint', 'size' => 4, 'default' => 1),
 			array('name' => 'force_view', 'type' => 'tinyint', 'size' => 2, 'default' => 0),
 			array('name' => 'mobile_view', 'type' => 'tinyint', 'size' => 2, 'default' => 0),
 			array('name' => 'display', 'type' => 'text',),
 			array('name' => 'display_custom', 'type' => 'text'),
-			array('name' => 'style', 'type' => 'text'),
 		),
 		'indexes' => array(
 			array('type' => 'primary', 'columns' => array('id_block')),
@@ -108,8 +109,8 @@ $sp_tables = array(
 			array('name' => 'body', 'type' => 'mediumtext'),
 			array('name' => 'type', 'type' => 'tinytext'),
 			array('name' => 'permissions', 'type' => 'mediumint', 'size' => 8, 'default' => 0),
+			array('name' => 'styles', 'type' => 'mediumint', 'size' => 8, 'default' => 0),
 			array('name' => 'views', 'type' => 'int', 'size' => 10, 'default' => 0),
-			array('name' => 'style', 'type' => 'text'),
 			array('name' => 'status', 'type' => 'tinyint', 'size' => 4, 'default' => 1),
 		),
 		'indexes' => array(
@@ -230,25 +231,25 @@ if (empty($has_block))
 <p>All this and SimplePortal has remained Simple! SimplePortal is built for simplicity and ease of use; ensuring the average forum administrator can install SimplePortal, configure a few settings, and show off the brand new portal to the users in minutes. Confusing menus, undesired pre-loaded blocks and settings that cannot be found are all avoided as much as possible. Because when it comes down to it, SimplePortal is YOUR portal, and should reflect your taste as much as possible.</p>';
 
 	$default_blocks = array(
-	'user_info' => array('label' => 'User Info', 'type' => 'sp_userInfo', 'col' => 1, 'row' => 1, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'whos_online' => array('label' => 'Who&#039;s Online', 'type' => 'sp_whosOnline', 'col' => 1, 'row' => 2, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'board_stats' => array('label' => 'Board Stats', 'type' => 'sp_boardStats', 'col' => 1, 'row' => 3, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'theme_select' => array('label' => 'Theme Select', 'type' => 'sp_theme_select', 'col' => 1, 'row' => 4, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'search' => array('label' => 'Search', 'type' => 'sp_quickSearch', 'col' => 1, 'row' => 5, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'news' => array('label' => 'News', 'type' => 'sp_news', 'col' => 2, 'row' => 1, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~windowbg|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
-		'welcome' => array('label' => 'Welcome', 'type' => 'sp_html', 'col' => 2, 'row' => 2, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~windowbg|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
-		'board_news' => array('label' => 'Board News', 'type' => 'sp_boardNews', 'col' => 2, 'row' => 3, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'recent_topics' => array('label' => 'Recent Topics', 'type' => 'sp_recent', 'col' => 3, 'row' => 1, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'top_poster' => array('label' => 'Top Poster', 'type' => 'sp_topPoster', 'col' => 4, 'row' => 1, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'recent_posts' => array('label' => 'Recent Posts', 'type' => 'sp_recent', 'col' => 4, 'row' => 2, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'staff' => array('label' => 'Forum Staff', 'type' => 'sp_staff', 'col' => 4, 'row' => 3, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'calendar' => array('label' => 'Calendar', 'type' => 'sp_calendar', 'col' => 4, 'row' => 4, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
-		'top_boards' => array('label' => 'Top Boards', 'type' => 'sp_topBoards', 'col' => 4, 'row' => 5, 'permissions' => 3, 'display' => '', 'display_custom' => '', 'style' => ''),
+	'user_info' => array('label' => 'User Info', 'type' => 'sp_userInfo', 'col' => 1, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'whos_online' => array('label' => 'Who&#039;s Online', 'type' => 'sp_whosOnline', 'col' => 1, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'board_stats' => array('label' => 'Board Stats', 'type' => 'sp_boardStats', 'col' => 1, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'theme_select' => array('label' => 'Theme Select', 'type' => 'sp_theme_select', 'col' => 1, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'search' => array('label' => 'Search', 'type' => 'sp_quickSearch', 'col' => 1, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'news' => array('label' => 'News', 'type' => 'sp_news', 'col' => 2, 'row' => 1, 'permissions' => 3, 'styles' => 8, 'display' => '', 'display_custom' => ''),
+		'welcome' => array('label' => 'Welcome', 'type' => 'sp_html', 'col' => 2, 'row' => 2, 'permissions' => 3, 'styles' => 8, 'display' => '', 'display_custom' => ''),
+		'board_news' => array('label' => 'Board News', 'type' => 'sp_boardNews', 'col' => 2, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'recent_topics' => array('label' => 'Recent Topics', 'type' => 'sp_recent', 'col' => 3, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'top_poster' => array('label' => 'Top Poster', 'type' => 'sp_topPoster', 'col' => 4, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'recent_posts' => array('label' => 'Recent Posts', 'type' => 'sp_recent', 'col' => 4, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'staff' => array('label' => 'Forum Staff', 'type' => 'sp_staff', 'col' => 4, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'calendar' => array('label' => 'Calendar', 'type' => 'sp_calendar', 'col' => 4, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+		'top_boards' => array('label' => 'Top Boards', 'type' => 'sp_topBoards', 'col' => 4, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
 	);
 
 	$db->insert('ignore',
 		'{db_prefix}sp_blocks',
-		array('label' => 'text', 'type' => 'text', 'col' => 'int', 'row' => 'int', 'permissions' => 'int', 'display' => 'text', 'display_custom' => 'text', 'style' => 'text'),
+		array('label' => 'text', 'type' => 'text', 'col' => 'int', 'row' => 'int', 'permissions' => 'int', 'styles' => 'int', 'display' => 'text', 'display_custom' => 'text'),
 		$default_blocks,
 		array('id_block', 'state')
 		);
@@ -349,5 +350,41 @@ $db->free_result($request);
 if (!in_array('mobile_view', $fields))
 	$db->query('', 'ALTER TABLE {db_prefix}sp_blocks ADD mobile_view TINYINT NOT NULL DEFAULT "0"');
 
-if (ELK == 'SSI')
+// Convert styles to style profiles
+$result = $db->db_query('','
+	SELECT 
+		id_profile
+	FROM {db_prefix}sp_profiles
+	WHERE type = {int:type}
+	LIMIT {int:limit}',
+	array(
+		'type' => 2,
+		'limit' => 1,
+	)
+);
+list ($has_style_profiles) = $db->db_fetch_row($result);
+$db->db_free_result($result);
+
+if (empty($has_style_profiles))
+{
+	$db->insert('replace',
+		'{db_prefix}sp_profiles',
+		array('id_profile' => 'int', 'type' => 'int', 'name' => 'text', 'value' => 'text'),
+		array(
+			array(4, 2, '$_default_title_default_body', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~portalbg|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(5, 2, '$_default_title_alternate_body', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~portalbg2|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(6, 2, '$_alternate_title_default_body', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~portalbg|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(7, 2, '$_alternate_title_alternate_body', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~portalbg2|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(8, 2, '$_no_title_default_body', 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~portalbg|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
+			array(9, 2, '$_no_title_alternate_body', 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~portalbg2|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
+			array(10, 2, '$_default_title_roundframe', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~roundframe|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(11, 2, '$_alternate_title_roundframe', 'title_default_class~category_header|title_custom_class~|title_custom_style~|body_default_class~roundframe|body_custom_class~|body_custom_style~|no_title~|no_body~'),
+			array(12, 2, '$_no_title_roundframe', 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~roundframe|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
+			array(13, 2, '$_no_title_information', 'title_default_class~|title_custom_class~|title_custom_style~|body_default_class~information|body_custom_class~|body_custom_style~|no_title~1|no_body~'),
+		),
+		array('id_profile')
+	);
+}
+
+if (ELK === 'SSI')
 	echo 'Database changes were carried out successfully.';

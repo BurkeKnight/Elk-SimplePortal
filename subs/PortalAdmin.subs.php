@@ -721,6 +721,7 @@ function sp_save_article($article_info, $is_new = false, $update_counts = true)
 		'body' => 'string',
 		'type' => 'string',
 		'permissions' => 'int',
+		'styles' => 'int',
 		'status' => 'int',
 	);
 
@@ -906,7 +907,7 @@ function sp_save_page($page_info, $is_new = false)
 		'body' => 'string',
 		'type' => 'string',
 		'permissions' => 'int',
-		'style' => 'string',
+		'styles' => 'int',
 		'status' => 'int',
 	);
 
@@ -1228,8 +1229,10 @@ function sp_prune_shoutbox($shoutbox_id, $where, $parameters, $all = false)
 
 /**
  * Returns the total count of profiles in the system
+ *
+ * @param int $type (1 = permissions, 2 = styles)
  */
-function sp_count_profiles()
+function sp_count_profiles($type = 1)
 {
 	$db = database();
 
@@ -1238,7 +1241,7 @@ function sp_count_profiles()
 		FROM {db_prefix}sp_profiles
 		WHERE type = {int:type}',
 		array(
-			'type' => 1,
+			'type' => $type,
 		)
 	);
 	list ($total_profiles) = $db->fetch_row($request);
@@ -1254,8 +1257,9 @@ function sp_count_profiles()
  * @param int $start
  * @param int $items_per_page
  * @param string $sort
+ * @param int $type (1 = permissions, 2 = styles)
  */
-function sp_load_profiles($start, $items_per_page, $sort)
+function sp_load_profiles($start, $items_per_page, $sort, $type = 1)
 {
 	global $scripturl, $txt, $context;
 
@@ -1265,9 +1269,11 @@ function sp_load_profiles($start, $items_per_page, $sort)
 	$request = $db->query('', '
 		SELECT id_profile, name
 		FROM {db_prefix}sp_profiles
+		WHERE type = {int:type}
 		ORDER BY {raw:sort}
 		LIMIT {int:start}, {int:limit}',
 		array(
+			'type' => $type,
 			'sort' => $sort,
 			'start' => $start,
 			'limit' => $items_per_page,
@@ -1480,9 +1486,8 @@ function sp_block_insert($blockInfo)
 	$db->insert('', '
 		{db_prefix}sp_blocks',
 		array(
-			'label' => 'string', 'type' => 'string', 'col' => 'int', 'row' => 'int', 'permissions' => 'int',
+			'label' => 'string', 'type' => 'string', 'col' => 'int', 'row' => 'int', 'permissions' => 'int', 'styles' => 'int',
 			'state' => 'int', 'force_view' => 'int', 'mobile_view' => 'int', 'display' => 'string', 'display_custom' => 'string',
-			'style' => 'string',
 		),
 		$blockInfo,
 		array('id_block')
@@ -1507,12 +1512,12 @@ function sp_block_update($blockInfo)
 	$block_fields = array(
 		"label = {string:label}",
 		"permissions = {int:permissions}",
+		"styles={int:styles}",
 		"state = {int:state}",
 		"force_view = {int:force_view}",
 		"mobile_view = {int:mobile_view}",
 		"display = {string:display}",
 		"display_custom = {string:display_custom}",
-		"style = {string:style}",
 	);
 
 	if (!empty($blockInfo['row']))
