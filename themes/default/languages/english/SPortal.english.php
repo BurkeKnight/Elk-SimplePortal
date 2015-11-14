@@ -7,7 +7,7 @@
  * @copyright 2015 SimplePortal Team
  * @license BSD 3-clause
  *
- * @version 1.0.0 Beta 1
+ * @version 1.0.0 Beta 2
  */
 
 // General strings
