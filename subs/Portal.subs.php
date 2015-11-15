@@ -21,7 +21,7 @@ function sportal_init($standalone = false)
 {
 	global $context, $scripturl, $modSettings, $settings, $maintenance, $sportal_version;
 
-	$sportal_version = '1.0.0 Beta 1';
+	$sportal_version = '1.0.0 Beta 2';
 
 	if ((isset($_REQUEST['action']) && $_REQUEST['action'] == 'dlattach'))
 		return;
