@@ -53,11 +53,9 @@ $sp_tables = array(
 			array('name' => 'row', 'type' => 'tinyint', 'size' => 4, 'default' => 0),
 			array('name' => 'permissions', 'type' => 'mediumint', 'size' => 8, 'default' => 0, 'unsigned' => true),
 			array('name' => 'styles', 'type' => 'mediumint', 'size' => 8, 'default' => 0, 'unsigned' => true), 
+			array('name' => 'visibility', 'type' => 'mediumint', 'size' => 8, 'default' => 0),			
 			array('name' => 'state', 'type' => 'tinyint', 'size' => 4, 'default' => 1),
 			array('name' => 'force_view', 'type' => 'tinyint', 'size' => 2, 'default' => 0),
-			array('name' => 'mobile_view', 'type' => 'tinyint', 'size' => 2, 'default' => 0),
-			array('name' => 'display', 'type' => 'text',),
-			array('name' => 'display_custom', 'type' => 'text'),
 		),
 		'indexes' => array(
 			array('type' => 'primary', 'columns' => array('id_block')),
@@ -231,25 +229,25 @@ if (empty($has_block))
 <p>All this and SimplePortal has remained Simple! SimplePortal is built for simplicity and ease of use; ensuring the average forum administrator can install SimplePortal, configure a few settings, and show off the brand new portal to the users in minutes. Confusing menus, undesired pre-loaded blocks and settings that cannot be found are all avoided as much as possible. Because when it comes down to it, SimplePortal is YOUR portal, and should reflect your taste as much as possible.</p>';
 
 	$default_blocks = array(
-	'user_info' => array('label' => 'User Info', 'type' => 'sp_userInfo', 'col' => 1, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'whos_online' => array('label' => 'Who&#039;s Online', 'type' => 'sp_whosOnline', 'col' => 1, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'board_stats' => array('label' => 'Board Stats', 'type' => 'sp_boardStats', 'col' => 1, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'theme_select' => array('label' => 'Theme Select', 'type' => 'sp_theme_select', 'col' => 1, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'search' => array('label' => 'Search', 'type' => 'sp_quickSearch', 'col' => 1, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'news' => array('label' => 'News', 'type' => 'sp_news', 'col' => 2, 'row' => 1, 'permissions' => 3, 'styles' => 8, 'display' => '', 'display_custom' => ''),
-		'welcome' => array('label' => 'Welcome', 'type' => 'sp_html', 'col' => 2, 'row' => 2, 'permissions' => 3, 'styles' => 8, 'display' => '', 'display_custom' => ''),
-		'board_news' => array('label' => 'Board News', 'type' => 'sp_boardNews', 'col' => 2, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'recent_topics' => array('label' => 'Recent Topics', 'type' => 'sp_recent', 'col' => 3, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'top_poster' => array('label' => 'Top Poster', 'type' => 'sp_topPoster', 'col' => 4, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'recent_posts' => array('label' => 'Recent Posts', 'type' => 'sp_recent', 'col' => 4, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'staff' => array('label' => 'Forum Staff', 'type' => 'sp_staff', 'col' => 4, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'calendar' => array('label' => 'Calendar', 'type' => 'sp_calendar', 'col' => 4, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
-		'top_boards' => array('label' => 'Top Boards', 'type' => 'sp_topBoards', 'col' => 4, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'display' => '', 'display_custom' => ''),
+	'user_info' => array('label' => 'User Info', 'type' => 'sp_userInfo', 'col' => 1, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'whos_online' => array('label' => 'Who&#039;s Online', 'type' => 'sp_whosOnline', 'col' => 1, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'board_stats' => array('label' => 'Board Stats', 'type' => 'sp_boardStats', 'col' => 1, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'theme_select' => array('label' => 'Theme Select', 'type' => 'sp_theme_select', 'col' => 1, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'search' => array('label' => 'Search', 'type' => 'sp_quickSearch', 'col' => 1, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'news' => array('label' => 'News', 'type' => 'sp_news', 'col' => 2, 'row' => 1, 'permissions' => 3, 'styles' => 8, 'visibility' => 14),
+		'welcome' => array('label' => 'Welcome', 'type' => 'sp_html', 'col' => 2, 'row' => 2, 'permissions' => 3, 'styles' => 8, 'visibility' => 14),
+		'board_news' => array('label' => 'Board News', 'type' => 'sp_boardNews', 'col' => 2, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'recent_topics' => array('label' => 'Recent Topics', 'type' => 'sp_recent', 'col' => 3, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'top_poster' => array('label' => 'Top Poster', 'type' => 'sp_topPoster', 'col' => 4, 'row' => 1, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'recent_posts' => array('label' => 'Recent Posts', 'type' => 'sp_recent', 'col' => 4, 'row' => 2, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'staff' => array('label' => 'Forum Staff', 'type' => 'sp_staff', 'col' => 4, 'row' => 3, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'calendar' => array('label' => 'Calendar', 'type' => 'sp_calendar', 'col' => 4, 'row' => 4, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
+		'top_boards' => array('label' => 'Top Boards', 'type' => 'sp_topBoards', 'col' => 4, 'row' => 5, 'permissions' => 3, 'styles' => 4, 'visibility' => 14),
 	);
 
 	$db->insert('ignore',
 		'{db_prefix}sp_blocks',
-		array('label' => 'text', 'type' => 'text', 'col' => 'int', 'row' => 'int', 'permissions' => 'int', 'styles' => 'int', 'display' => 'text', 'display_custom' => 'text'),
+		array('label' => 'text', 'type' => 'text', 'col' => 'int', 'row' => 'int', 'permissions' => 'int', 'styles' => 'int', 'visibility' => 'int'),
 		$default_blocks,
 		array('id_block', 'state')
 		);
@@ -287,6 +285,7 @@ if (empty($has_block))
 	);
 }
 
+// Update to use permission profiles if they have not been added
 $result = $db->query('', '
 	SELECT id_profile
 	FROM {db_prefix}sp_profiles
@@ -299,7 +298,7 @@ $result = $db->query('', '
 );
 list ($has_permission_profiles) = $db->fetch_row($result);
 $db->free_result($result);
-
+// No profiles, so add some defaults to get started
 if (empty($has_permission_profiles))
 {
 	$request = $db->query('', '
@@ -384,6 +383,51 @@ if (empty($has_style_profiles))
 		),
 		array('id_profile')
 	);
+}
+
+// Add / convert visibility profiles if none exist
+$result = $db->query('','
+	SELECT 
+		id_profile
+	FROM {db_prefix}sp_profiles
+	WHERE type = {int:type}
+	LIMIT {int:limit}',
+	array(
+		'type' => 3,
+		'limit' => 1,
+	)
+);
+list ($has_visibility_profiles) = $db->fetch_row($result);
+$db->free_result($result);
+if (empty($has_visibility_profiles))
+{
+	$db->insert('replace',
+		'{db_prefix}sp_profiles',
+		array('id_profile' => 'int', 'type' => 'int', 'name' => 'text', 'value' => 'text'),
+		array(
+			array(14, 3, '$_show_on_portal', 'portal|'),
+			array(15, 3, '$_show_on_board_index', 'forum|'),
+			array(16, 3, '$_show_on_all_actions', '|allaction'),
+			array(17, 3, '$_show_on_all_boards', '|allboard'),
+			array(18, 3, '$_show_on_all_pages', '|allpage'),
+			array(19, 3, '$_show_on_all_categories', '|allcategory'),
+			array(20, 3, '$_show_on_all_articles', '|allarticle'),
+			array(21, 3, '$_show_everywhere', '|all|1'),
+		),
+		array('id_profile')
+	);
+}
+
+// Update tables to use visibility profiles in place of display
+foreach (array('sp_blocks') as $sp_visibility)
+{
+	$block_cols = $dbtbl->db_list_columns('{db_prefix}' . $sp_visibility, true);
+	if (!isset($block_cols['visibility']))
+	{
+		$dbtbl->db_add_column('{db_prefix}' . $sp_visibility, array('name' => 'visibility', 'type' => 'mediumint', 'size' => 8, 'default' => 0, 'unsigned' => true));
+		//$dbtbl->db_remove_column('{db_prefix}' . $sp_style, 'display');
+		//$dbtbl->db_remove_column('{db_prefix}' . $sp_style, 'display_custom');
+	}
 }
 
 $db_package_log = array();
